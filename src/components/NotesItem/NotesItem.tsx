@@ -1,19 +1,31 @@
 import React from 'react';
 import { dateParse } from '../../utils/dateParse';
 import { categoriesInfo } from '../../db/categories';
-import { Note } from '../NotesList/NotesList';
-import '../Table/NotesTable.css';
+import './NotesItem.css';
+import '../../shared/styles/shared.css';
+import ControlBtn from '../ControlBtn';
+import Icon from '../Icon';
+import { nanoid } from 'nanoid';
 
 type Props = {
-    note: Note;
+  key: string;
+  name: string;
+  created: string;
+  category: string;
+  content: string;
 }
 
-function NotesItem({id, name, created, category, content}: Note) {
+
+function NotesItem({ name, created, category, content}: Props) {
     const datesInNote = dateParse(content);
     const categoryForRender = categoriesInfo.find(item => item.category === category);
 
+    const onClick = (event: React.MouseEvent) => {
+      console.log(event.target);
+    }
+
   return (
-    <tr id={id} >
+    <tr >
         <td className='table-data'>
             <span className="material-symbols-outlined category">{categoryForRender?.icon}</span>
         </td>
@@ -22,12 +34,12 @@ function NotesItem({id, name, created, category, content}: Note) {
         <td className='table-data'>{category}</td>
         <td className='table-data'>{content}</td>
         <td className='table-data'>{datesInNote}</td>
-        <td className='table-data'><span className="material-symbols-outlined edit">edit</span></td>
+        <td className='table-data'><ControlBtn onClick={onClick} btnClass='transparent'><Icon iconClass='edit' iconName='edit' /></ControlBtn></td>
         <td className='table-data'>
-            <span className="material-symbols-outlined archive">archive</span>
-            <span className="material-symbols-outlined unarchive is-hidden">unarchive</span>
+            <ControlBtn onClick={onClick} btnClass='transparent'><Icon iconName='archive' iconClass='archive' /></ControlBtn>
+            <ControlBtn onClick={onClick} btnClass='transparent is-hidden'><Icon iconName='unarchive' iconClass='unarchive' /></ControlBtn>
         </td>
-        <td className='table-data'><span className="material-symbols-outlined delete">delete</span></td>
+        <td id={nanoid()} className='table-data'><ControlBtn onClick={onClick} btnClass='transparent'><Icon iconClass='delete' iconName='delete' /></ControlBtn></td>
     </tr>
   )
 }

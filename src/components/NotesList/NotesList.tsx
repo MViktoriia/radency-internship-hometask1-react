@@ -17,11 +17,11 @@ type Props = {
 
 function NotesList({notes}: Props) {
   return (
-    <tbody>
+    <>
         {notes.map(({id,name,created,category,content}) =>  (
-            <NotesItem id={id} name={name} created={created} category={category} content={content} />
+            <NotesItem key={id} name={name} created={created} category={category} content={content} />
          ))}
-    </tbody>
+    </>
    
   )
 }
