@@ -1,7 +1,7 @@
 import React from 'react';
-import { Note } from '../NotesList/NotesList';
 import { nanoid } from 'nanoid';
 import Icon from '../Icon/Icon';
+import { Note } from '../../redux/notesSlice';
 
 
 type Category = {

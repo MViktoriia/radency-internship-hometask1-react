@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import notes from "../db/notes_db";
 
-type Note = {
+export type Note = {
     id: string;
     name: string;
     created: string;
@@ -9,16 +10,14 @@ type Note = {
     archived: boolean;
 }
 
-type NoteState = {
-    notes: Note[];
-    isLoading: boolean;
-    error: unknown;
+export type NoteState = {
+    list: Note[];
+    isArchiveShown: boolean;
 }
 
 const initialState: NoteState = {
-    notes: [],
-    isLoading: false,
-    error: null,
+    list: notes,
+    isArchiveShown: false,
 } 
 
 const notesSlice = createSlice({
@@ -26,33 +25,40 @@ const notesSlice = createSlice({
     initialState,
     reducers: {
         addNote(state, action: PayloadAction<Note>) {
-            state.notes.push({
+            state.list.push({
                 id: action.payload.id,
                 name: action.payload.name,
                 created: action.payload.created,
                 category: action.payload.category,
                 content: action.payload.content,
-                archived: false,
+                archived: action.payload.archived,
             });
         },
         editNote(state, action: PayloadAction<Note>) {
-
+            const editedNote = state.list.find(note => note.id === action.payload.id);
+            if (editedNote) {
+                editedNote.name = action.payload.name;
+                editedNote.category = action.payload.category;
+                editedNote.content = action.payload.content;
+            }
         },
-        deleteNote(state, action: PayloadAction<Note>) {
-        
+        removeNote(state, action: PayloadAction<string>) {
+            state.list = state.list.filter(note => note.id !== action.payload);
+        }
+        ,
+        toggleNoteStatus(state, action: PayloadAction<string>) {
+            const toggledNote = state.list.find(note => note.id === action.payload);
+            if (toggledNote) {
+                toggledNote.archived = !toggledNote.archived;
+            } 
         },
-        archiveNote(state, action: PayloadAction<Note>) {
-
-        },
-        unarchiveNote(state, action: PayloadAction<Note>) {
-
+        showArchiveNotes(state, action: PayloadAction<boolean>) {
+            state.isArchiveShown = action.payload;
         }
     }
-
 })
 
-console.log(typeof Error('Help'));
 
 
-export const {addNote, editNote, deleteNote, archiveNote, unarchiveNote} = notesSlice.actions;
+export const {addNote, editNote, removeNote, toggleNoteStatus, showArchiveNotes} = notesSlice.actions;
 export default notesSlice.reducer;

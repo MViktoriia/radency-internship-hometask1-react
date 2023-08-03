@@ -5,16 +5,16 @@ import './Select.css';
 type Props = {
     name: string;
     values: string[];
-    selectedValue: string;
     onChange: React.ChangeEventHandler<HTMLSelectElement>; 
 }
 
-function Select({name, values, selectedValue, onChange}: Props) {
+
+function Select({name, values, onChange}: Props) {
   return (
-      <select className='notes-select' name={name} id={name} value={selectedValue} onChange={onChange}>
+      <select className='notes-select' name={name} id={name} onChange={onChange}>
           {values.map(value => (<option key={value} value={value}>{value}</option>))}
       </select>
   )
-}
+};
 
 export default Select;
