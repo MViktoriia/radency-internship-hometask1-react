@@ -1,7 +1,7 @@
-// import React from 'react';
+import React from 'react';
 
 import { Note } from "../../redux/notesSlice";
-import NotesItem from "../NotesItem/NotesItem";
+import NotesItem from "../NotesItem";
 
 type Props = {
     notes: Note[];

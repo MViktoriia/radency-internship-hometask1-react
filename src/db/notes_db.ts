@@ -4,7 +4,7 @@ const notes = [
       name: 'Shopping list',
       created: '2023-04-20',
       category: 'Task',
-      content: 'Tomato, bread',
+      content: 'Tomato, bread, milk, eggs',
       archived: true,
     },
     {
@@ -17,7 +17,7 @@ const notes = [
     },
     {
       id: '3',
-      name: 'New feature',
+      name: 'Dinner',
       created: '2023-05-06',
       category: 'Task',
       content: 'Add new feature until 31/07/2023',
@@ -36,7 +36,7 @@ const notes = [
       name: 'New feature',
       created: '2023-07-08',
       category: 'Task',
-      content: 'Add new feature until 30/07/2023',
+      content: 'Add new feature until 07/08/2023',
       archived: false,
     },
     {
@@ -49,10 +49,10 @@ const notes = [
     },
     {
       id: '7',
-      name: 'Piknik',
+      name: 'Picnic',
       created: '2023-07-29',
       category: 'Idea',
-      content: 'Prepare small piknik in park on Sunday 06/08/2023 ',
+      content: 'Prepare small picnic in park on Sunday 06/08/2023 ',
       archived: false,
     },
   ];

@@ -1,0 +1,26 @@
+.note-form {
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+}
+
+.note-form-label {
+    display: block;
+    font-size: 16px;
+}
+
+.note-form-label:not(:last-child) {
+    margin-bottom: 30px;
+}
+
+.note-category, .note-name, .note-date, .note-content {
+    font-size: 14px;
+    height: 25px;
+    width: fit-content;
+    margin-left: 15px;
+}
+
+.save-note-button {
+    font-size: 16px;
+    padding: 5px 15px;
+}

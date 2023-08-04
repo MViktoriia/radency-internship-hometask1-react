@@ -12,7 +12,7 @@ type Props = {
 function Table({tableHeadData, children}: Props) {
   return (
     <table className='table'>
-        <thead >
+        <thead className='table-head' >
             <tr>
                 {tableHeadData.map(item => <th key={nanoid()} className='table-head-data'>{item}</th>)}
             </tr>

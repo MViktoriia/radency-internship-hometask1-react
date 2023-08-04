@@ -1,21 +1,5 @@
-.is-hidden {
-    visibility: hidden;
-    display: none;
-}
-
-.visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    padding: 0;
-    overflow: hidden;
-    border: 0;
-    clip: rect(0 0 0 0);
-}
 
 .wrapper {
     display: flex;
     justify-content: flex-end;
-    margin-top: 20px;
 }
