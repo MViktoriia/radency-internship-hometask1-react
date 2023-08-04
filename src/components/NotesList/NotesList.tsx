@@ -1,27 +1,21 @@
-// import React from 'react';
+import React from 'react';
 
-import NotesItem from "../NotesItem/NotesItem";
-
-export type Note = {
-    id: string;
-    name: string;
-    created: string;
-    category: string;
-    content: string;
-    archived?: boolean;
-}
+import { Note } from "../../redux/notesSlice";
+import NotesItem from "../NotesItem";
 
 type Props = {
     notes: Note[];
 }
 
 function NotesList({notes}: Props) {
+
+
   return (
-    <tbody>
+    <>
         {notes.map(({id,name,created,category,content}) =>  (
-            <NotesItem id={id} name={name} created={created} category={category} content={content} />
+            <NotesItem id={id} key={id} name={name} created={created} category={category} content={content} />
          ))}
-    </tbody>
+    </>
    
   )
 }

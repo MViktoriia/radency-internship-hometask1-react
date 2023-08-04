@@ -11,4 +11,4 @@ function Section({children}: Props) {
   )
 }
 
-export default Section
+export default Section;
