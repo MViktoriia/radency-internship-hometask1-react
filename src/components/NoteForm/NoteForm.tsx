@@ -42,16 +42,8 @@ function NoteForm({noteId, noteName, noteDate, noteCategory, noteContent, isEdit
       return;
     }
 
-    if (name === '' && date === '' && content === '' && category === '') {
-    
-      closeModal();
-      return;
-    }
-
     if (category === '') {
       alert('Please choose category');
-     
-      // closeModal();
       return;
     }
 
@@ -70,13 +62,13 @@ function NoteForm({noteId, noteName, noteDate, noteCategory, noteContent, isEdit
 
   return (
     <form onSubmit={handleSubmit} className="note-form" >   
-      <label className="note-form-label" htmlFor="note-name">Name
-        <input className='note-name' value={name} onChange={(e)=> setName(e.target.value)} id="note-name" name="note-name" type="text"/> 
+      <label className="note-form-label" htmlFor="note-name">
+        <input placeholder='Name' className='note-name' value={name} onChange={(e)=> setName(e.target.value)} id="note-name" name="note-name" type="text"/> 
       </label>
-      <label className="note-form-label" htmlFor="note-date">Date
+      <label className="note-form-label" htmlFor="note-date">
         <input className='note-date' disabled={isEdit} value={date} onChange={(e)=> setDate(e.target.value)} id="note-date" name="note-date" type="date"/>
       </label>
-      <label className="note-form-label" htmlFor="note-category">Category
+      <label className="note-form-label" htmlFor="note-category">
           <select className='note-category' value={category} onChange={(e)=> setCategory(e.target.value)} name="note-category" id="note-category">
               <option value="Task">Task</option>
               <option value="Random Thought">Random Thought</option>
@@ -84,11 +76,11 @@ function NoteForm({noteId, noteName, noteDate, noteCategory, noteContent, isEdit
               <option value="Quote">Quote</option>   
           </select>
       </label>
-      <label className="note-form-label" htmlFor="note-content">Content
-        <input className='note-content' value={content} onChange={(e)=> setContent(e.target.value)} id="note-content" name="note-content" type="text"/>
+      <label className="note-form-label" htmlFor="note-content">
+        <input placeholder='Content' className='note-content' value={content} onChange={(e)=> setContent(e.target.value)} id="note-content" name="note-content" type="text"/>
       </label>
-      <button type="submit" className="save-note-button">Save</button>
-  </form>
+      {isEdit ? <button type="submit" className="save-note-button">Save</button> : <button type="submit" className="save-note-button"><span className="material-symbols-outlined">arrow_back</span></button>}
+    </form>
   )
 }
 
