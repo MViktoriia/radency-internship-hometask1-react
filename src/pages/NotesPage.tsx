@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
+import { nanoid } from 'nanoid';
 import { categoriesInfo } from '../db/categories';
 import Section from '../components/Section';
 import Container from '../components/Container';
@@ -11,10 +12,13 @@ import ControlBtn from '../components/ControlBtn/ControlBtn';
 import Select from '../components/Select';
 import NoteForm from '../components/NoteForm/NoteForm';
 import Modal from '../components/Modal';
+import { formatDate } from '../utils/formatDate';
+
 
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
-import { showArchiveNotes } from '../redux/notesSlice';
-import { formatDate } from '../utils/formatDate';
+import { addNote, showArchiveNotes } from '../redux/notesSlice';
+
+
 
 
 function NotesPage() {
@@ -28,8 +32,13 @@ function NotesPage() {
     const activeNotes = allNotes.filter(note => note.archived === false);
     const archiveNotes = allNotes.filter(note => note.archived === true);
     const isArchiveShown = useAppSelector(state => state.notes.isArchiveShown);
+    const todayDate = new Date();
+    const formatedTodayDate = formatDate(todayDate);
 
     const [showModal, setShowModal] = useState<boolean>(false);
+    const [newNoteId, setNewNoteId] = useState<string>('');
+   
+
     
     const onSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => { 
         switch (event.target.value) {
@@ -44,8 +53,25 @@ function NotesPage() {
         }         
     };
 
-    const todayDate = new Date();
-    const formatedTodayDate = formatDate(todayDate);
+    const onCreateBtnClick = () => {
+        const id = nanoid();
+        setNewNoteId(id);
+        setShowModal(true);
+        document.body.classList.add('modal-open');
+
+        const newNote = {
+        id: id,
+        name: '',
+        created: formatedTodayDate,
+        category: 'Task',
+        content: '',
+        archived: false,
+        }
+        
+        dispatch(addNote(newNote));
+    }
+
+    
     
 
     return (
@@ -56,7 +82,7 @@ function NotesPage() {
                         {isArchiveShown ? <NotesList notes={archiveNotes}/> : <NotesList notes={activeNotes} />}
                     </NotesTable>
                     <div className='wrapper'>
-                        {!isArchiveShown && <ControlBtn onClick={()=> {setShowModal(true); document.body.classList.add('modal-open');}} btnClass='create-btn'>Create Node</ControlBtn>}
+                        {!isArchiveShown && <ControlBtn onClick={onCreateBtnClick} btnClass='create-btn'>Create Node</ControlBtn>}
                     </div> 
                     <div className='wrapper archive-select-wrapper'>
                         <Select name='show-archive' values={optionsValues} onChange={onSelectChange}/>                
@@ -71,7 +97,7 @@ function NotesPage() {
                 </Container>
             </Section>
             {showModal && createPortal(
-        <Modal onClose={()=> {setShowModal(false); document.body.classList.remove('modal-open');}}><NoteForm noteId='' noteName='' noteDate={formatedTodayDate} noteCategory='Task' noteContent='' isEdit={false} closeModal={()=> {setShowModal(false); document.body.classList.remove('modal-open');}}/></Modal>,
+        <Modal onClose={()=> {setShowModal(false); document.body.classList.remove('modal-open');}}><NoteForm noteId={newNoteId} noteName='' noteDate={formatedTodayDate} noteCategory='Task' noteContent='' isEdit={false} closeModal={()=> {setShowModal(false); document.body.classList.remove('modal-open');}}/></Modal>,
         document.body
       )}
     </main>

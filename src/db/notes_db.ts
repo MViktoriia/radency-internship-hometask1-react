@@ -17,10 +17,10 @@ const notes = [
     },
     {
       id: '3',
-      name: 'Dinner',
+      name: 'Meeting',
       created: '2023-05-06',
       category: 'Task',
-      content: 'Add new feature until 31/07/2023',
+      content: 'Meeting 09/08/2023 at 9 am',
       archived: false,
     },
     {

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { nanoid } from 'nanoid';
 import './NoteForm.css'
 import { useAppDispatch } from '../../redux/hooks';
-import { addNote, editNote } from '../../redux/notesSlice';
+import { editNote } from '../../redux/notesSlice';
 
 
 type Props = {
@@ -27,56 +26,29 @@ function NoteForm({noteId, noteName, noteDate, noteCategory, noteContent, isEdit
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (isEdit) {
-      const noteToEdit = {
-        id: noteId,
-        name: name,
-        created: date,
-        category: category,
-        content: content,
-        archived: false,
-      }
-
-      dispatch(editNote(noteToEdit));
-      closeModal();
-      return;
-    }
-
-    if (name === '' && date === '' && content === '' && category === '') {
-    
-      closeModal();
-      return;
-    }
-
-    if (category === '') {
-      alert('Please choose category');
-     
-      // closeModal();
-      return;
-    }
-
-    const newNote = {
-      id: nanoid(),
+    const noteToEdit = {
+      id: noteId,
       name: name,
       created: date,
       category: category,
       content: content,
       archived: false,
     }
-    dispatch(addNote(newNote));
+
+    dispatch(editNote(noteToEdit));
     closeModal();
   }
 
 
   return (
     <form onSubmit={handleSubmit} className="note-form" >   
-      <label className="note-form-label" htmlFor="note-name">Name
-        <input className='note-name' value={name} onChange={(e)=> setName(e.target.value)} id="note-name" name="note-name" type="text"/> 
+      <label className="note-form-label" htmlFor="note-name">
+        <input placeholder='Name' className='note-name' value={name} onChange={(e)=> setName(e.target.value)} id="note-name" name="note-name" type="text"/> 
       </label>
-      <label className="note-form-label" htmlFor="note-date">Date
+      <label className="note-form-label" htmlFor="note-date">
         <input className='note-date' disabled={isEdit} value={date} onChange={(e)=> setDate(e.target.value)} id="note-date" name="note-date" type="date"/>
       </label>
-      <label className="note-form-label" htmlFor="note-category">Category
+      <label className="note-form-label" htmlFor="note-category">
           <select className='note-category' value={category} onChange={(e)=> setCategory(e.target.value)} name="note-category" id="note-category">
               <option value="Task">Task</option>
               <option value="Random Thought">Random Thought</option>
@@ -84,11 +56,11 @@ function NoteForm({noteId, noteName, noteDate, noteCategory, noteContent, isEdit
               <option value="Quote">Quote</option>   
           </select>
       </label>
-      <label className="note-form-label" htmlFor="note-content">Content
-        <input className='note-content' value={content} onChange={(e)=> setContent(e.target.value)} id="note-content" name="note-content" type="text"/>
+      <label className="note-form-label" htmlFor="note-content">
+        <textarea placeholder='Content' className='note-content' value={content} onChange={(e)=> setContent(e.target.value)} id="note-content" name="note-content"/>
       </label>
-      <button type="submit" className="save-note-button">Save</button>
-  </form>
+      {isEdit ? <button type="submit" className="save-note-button">Save</button> : <button onClick={handleSubmit} type="submit" className="add-note-button"><span className="material-symbols-outlined">arrow_back</span></button>}
+    </form>
   )
 }
 
