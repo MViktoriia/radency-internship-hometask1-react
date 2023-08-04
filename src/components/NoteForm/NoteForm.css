@@ -18,11 +18,30 @@
     margin-bottom: 30px;
 }
 
-.note-category, .note-name, .note-date, .note-content {
+.note-category, .note-name, .note-date {
     font-size: 20px;
     height: 40px;
     width: 100%;
     margin-left: 15px;
+}
+
+.note-content {
+    font-size: 20px;
+    height: 100px;
+    width: 100%;
+    margin-left: 15px;
+    resize: none;
+    
+}
+
+.add-note-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    font-size: 16px;
+    padding: 5px 5px 5px 5px;
+    margin-top: 50px;
 }
 
 .save-note-button {
@@ -31,6 +50,6 @@
     align-items: center;
     width: fit-content;
     font-size: 16px;
-    padding: 5px 5px 5px 5px;
+    padding: 10px 10px 10px 10px;
     margin-top: 50px;
 }

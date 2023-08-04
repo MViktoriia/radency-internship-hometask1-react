@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { nanoid } from 'nanoid';
 import './NoteForm.css'
 import { useAppDispatch } from '../../redux/hooks';
-import { addNote, editNote } from '../../redux/notesSlice';
+import { editNote } from '../../redux/notesSlice';
 
 
 type Props = {
@@ -27,35 +26,16 @@ function NoteForm({noteId, noteName, noteDate, noteCategory, noteContent, isEdit
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (isEdit) {
-      const noteToEdit = {
-        id: noteId,
-        name: name,
-        created: date,
-        category: category,
-        content: content,
-        archived: false,
-      }
-
-      dispatch(editNote(noteToEdit));
-      closeModal();
-      return;
-    }
-
-    if (category === '') {
-      alert('Please choose category');
-      return;
-    }
-
-    const newNote = {
-      id: nanoid(),
+    const noteToEdit = {
+      id: noteId,
       name: name,
       created: date,
       category: category,
       content: content,
       archived: false,
     }
-    dispatch(addNote(newNote));
+
+    dispatch(editNote(noteToEdit));
     closeModal();
   }
 
@@ -77,9 +57,9 @@ function NoteForm({noteId, noteName, noteDate, noteCategory, noteContent, isEdit
           </select>
       </label>
       <label className="note-form-label" htmlFor="note-content">
-        <input placeholder='Content' className='note-content' value={content} onChange={(e)=> setContent(e.target.value)} id="note-content" name="note-content" type="text"/>
+        <textarea placeholder='Content' className='note-content' value={content} onChange={(e)=> setContent(e.target.value)} id="note-content" name="note-content"/>
       </label>
-      {isEdit ? <button type="submit" className="save-note-button">Save</button> : <button type="submit" className="save-note-button"><span className="material-symbols-outlined">arrow_back</span></button>}
+      {isEdit ? <button type="submit" className="save-note-button">Save</button> : <button onClick={handleSubmit} type="submit" className="add-note-button"><span className="material-symbols-outlined">arrow_back</span></button>}
     </form>
   )
 }
