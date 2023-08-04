@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/radency-internship-hometask2-react/static/css/main.f4fdf395.css",
-    "main.js": "/radency-internship-hometask2-react/static/js/main.106b911e.js",
+    "main.css": "/radency-internship-hometask2-react/static/css/main.864063db.css",
+    "main.js": "/radency-internship-hometask2-react/static/js/main.cbc9125d.js",
     "index.html": "/radency-internship-hometask2-react/index.html",
-    "main.f4fdf395.css.map": "/radency-internship-hometask2-react/static/css/main.f4fdf395.css.map",
-    "main.106b911e.js.map": "/radency-internship-hometask2-react/static/js/main.106b911e.js.map"
+    "main.864063db.css.map": "/radency-internship-hometask2-react/static/css/main.864063db.css.map",
+    "main.cbc9125d.js.map": "/radency-internship-hometask2-react/static/js/main.cbc9125d.js.map"
   },
   "entrypoints": [
-    "static/css/main.f4fdf395.css",
-    "static/js/main.106b911e.js"
+    "static/css/main.864063db.css",
+    "static/js/main.cbc9125d.js"
   ]
 }
