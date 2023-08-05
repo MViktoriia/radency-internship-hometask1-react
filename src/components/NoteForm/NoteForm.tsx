@@ -59,7 +59,7 @@ function NoteForm({noteId, noteName, noteDate, noteCategory, noteContent, isEdit
       <label className="note-form-label" htmlFor="note-content">
         <textarea placeholder='Content' className='note-content' value={content} onChange={(e)=> setContent(e.target.value)} id="note-content" name="note-content"/>
       </label>
-      {isEdit ? <button type="submit" className="save-note-button">Save</button> : <button onClick={handleSubmit} type="submit" className="add-note-button"><span className="material-symbols-outlined">arrow_back</span></button>}
+      <button onClick={handleSubmit} type="submit" className="save-note-button">Save</button>
     </form>
   )
 }
